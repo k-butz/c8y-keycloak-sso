@@ -2,8 +2,6 @@
 
 This project contains guides you in:
 
-* Creating AWS EC2 instance
-
 * (Docker-) Installation of Keycloak on an AWS EC2 instance
 
 * Setup Nginx with TLS
