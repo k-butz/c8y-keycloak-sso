@@ -40,6 +40,8 @@ First, create an SSL certificate for your domain. I'm having the domain `*.kbutz
 
 I've placed the certificate in `/etc/letsencrypt/live/keycloak.kbutz.org/fullchain.pem` and `/etc/letsencrypt/live/keycloak.kbutz.org/privkey.pem`. 
 
+Now do below steps one-by-one:
+
 ```
 sudo apt install nginx
 
@@ -60,7 +62,7 @@ sudo cp nginx.conf /etc/nginx/sites-available/keycloak.kbutz.conf
 sudo ln -s /etc/nginx/sites-available/keycloak.kbutz.conf /etc/nginx/sites-enabled/keycloak.kbutz.conf
 ```
 
-Now use `sudo nginx -t` to let nginx check if your configuration is valid. If so, restart the service via `sudo systemctl restart nginx`. Make sure it's running with checking `sudo systemctl status nginx`. 
+You can use `sudo nginx -t` to let nginx check if your configuration is valid. If so, restart the service via `sudo systemctl restart nginx`. Make sure it's running with checking `sudo systemctl status nginx`. 
 
 
 **Domain**
