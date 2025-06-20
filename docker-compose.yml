@@ -1,0 +1,47 @@
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: toor
+      MARIADB_DATABASE: keycloak
+      MARIADB_USER: keycloak
+      MARIADB_PASSWORD: keycloak
+      mem_limit: 300m
+    container_name: mariadb
+    restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - keycloak-auth
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      KC_DB: mariadb
+      KC_DB_SCHEMA: keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+      KC_DB_URL_HOST: mariadb
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_PROXY_HEADERS: xforwarded
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+      KC_HOSTNAME_URL: https://keycloak.kbutz.org
+      mem_limit: 500m
+    ports:
+      - 8443:8443
+      - 8081:8080
+    container_name: keycloak
+    restart: always
+    networks:
+      - keycloak-auth
+    depends_on:
+      - mariadb
+    command: start
+volumes:
+  mariadb_data:
+    driver: local
+networks:
+  keycloak-auth:
+    driver: bridge

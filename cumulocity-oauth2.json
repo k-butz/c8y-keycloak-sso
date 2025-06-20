@@ -1,0 +1,104 @@
+{
+  "accessTokenToUserDataMappings": {
+    "emailClaimName": "https://cumulocity/email",
+    "firstNameClaimName": "https://cumulocity/username",
+    "lastNameClaimName": null,
+    "phoneNumberClaimName": null
+  },
+  "audience": "account",
+  "authorizationRequest": {
+    "headers": {},
+    "method": "GET",
+    "operation": "REDIRECT",
+    "requestParams": {
+      "client_id": "${clientId}",
+      "redirect_uri": "${redirectUri}",
+      "response_type": "code"
+    },
+    "url": "https://keycloak.kbutz.org/realms/c8y-realm/protocol/openid-connect/auth"
+  },
+  "buttonName": "Sign On via Keycloak",
+  "clientId": "c8y-client-01",
+  "externalTokenConfig": {
+    "enabled": true,
+    "userOrAppIdConfig": {
+      "constantValue": "email",
+      "jwtField": "email",
+      "useConstantValue": false
+    }
+  },
+  "grantType": "AUTHORIZATION_CODE",
+  "issuer": "https://keycloak.kbutz.org/realms/c8y-realm",
+  "logoutRequest": {
+    "headers": {},
+    "method": "POST",
+    "operation": "REDIRECT",
+    "requestParams": {},
+    "url": "https://keycloak.kbutz.org/realms/c8y-realm/protocol/openid-connect/logout"
+  },
+  "onNewUser": {
+    "dynamicMapping": {
+      "configuration": {
+        "manageRolesOnlyFromAccessMapping": false,
+        "mapFromIdToken": false,
+        "mapRolesOnlyForNewUser": false
+      },
+      "inventoryMappings": [],
+      "mappings": [
+        {
+          "thenApplications": [],
+          "thenGroups": [
+            2
+          ],
+          "when": {
+            "childPredicates": [
+              {
+                "childPredicates": [],
+                "operator": "IN",
+                "parameterPath": "realm_access.roles",
+                "value": "c8y-admin"
+              }
+            ],
+            "operator": "AND"
+          }
+        }
+      ]
+    }
+  },
+  "providerName": "Keycloak",
+  "redirectToPlatform": "https://kb-keycloak.latest.stage.c8y.io/tenant/oauth",
+  "refreshRequest": {
+    "body": "grant_type=refresh_token&refresh_token=${refreshToken}&client_id=${clientId}&client_secret=<secret>",
+    "headers": {},
+    "method": "POST",
+    "operation": "EXECUTE",
+    "requestParams": {
+      "client_id": "${clientId}",
+      "client_secret": "<secret>",
+      "redirect_uri": "${redirectUri}",
+      "response_type": "refresh"
+    },
+    "url": "https://keycloak.kbutz.org/realms/c8y-realm/protocol/openid-connect/token"
+  },
+  "signatureVerificationConfig": {
+    "jwks": {
+      "jwksUri": "https://keycloak.kbutz.org/realms/c8y-realm/protocol/openid-connect/certs"
+    }
+  },
+  "template": "CUSTOM",
+  "tokenRequest": {
+    "body": "grant_type=authorization_code&code=${code}&redirect_uri=${redirectUri}&client_id=${clientId}&client_secret=<secret>",
+    "headers": {},
+    "method": "POST",
+    "operation": "EXECUTE",
+    "requestParams": {},
+    "url": "https://keycloak.kbutz.org/realms/c8y-realm/protocol/openid-connect/token"
+  },
+  "type": "OAUTH2",
+  "userIdConfig": {
+    "jwtField": "email",
+    "useConstantValue": false
+  },
+  "userManagementSource": "REMOTE",
+  "visibleOnLoginPage": true
+}
