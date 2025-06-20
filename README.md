@@ -1,7 +1,5 @@
 # About
 
-<img src="docs/imgs/overview.png" width="500">
-
 This project contains guides you in:
 
 * (Docker-) Installation of Keycloak on an AWS EC2 instance
@@ -11,6 +9,8 @@ This project contains guides you in:
 * Configuration of Users within Keycloak
 
 * SSO Integration of Keycloak within a Cumulocity Tenant
+
+<img src="docs/imgs/overview.png" width="500">
 
 # Instructions
 
