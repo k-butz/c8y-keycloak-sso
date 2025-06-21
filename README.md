@@ -10,7 +10,7 @@ This project contains guides you in:
 
 * SSO Integration of Keycloak within a Cumulocity Tenant
 
-<img src="docs/imgs/overview.png" width="500">
+<img src="docs/imgs/project-overview.png" width="500">
 
 # Instructions
 
